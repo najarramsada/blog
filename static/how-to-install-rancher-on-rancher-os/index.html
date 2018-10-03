@@ -1,0 +1,404 @@
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>How to install Rancher on RancherOS</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css?v=04a0ffb201">
+
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="amphtml" href="amp/index.html">
+    
+    <meta property="og:site_name" content="BLOGS @ RAMSADA.io">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="How to install Rancher on RancherOS">
+    <meta property="og:description" content="In this guide, I am going to cover how to install Kubernetes cluster on single node using Rancher on RancherOS as Virtual Machine.KubernetesKubernetes is an open-source container-orchestration system for automating deployment, scaling and management of containerized applications. It was originally designed by Google and is now maintained by the">
+    <meta property="og:url" content="http://localhost:2368/how-to-install-rancher-on-rancher-os/">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1521583621977-c63c261f3054?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ&amp;s=49b1548d6a25af342d4132951d44abcb">
+    <meta property="article:published_time" content="2018-10-03T00:47:57.000Z">
+    <meta property="article:modified_time" content="2018-10-03T09:35:14.000Z">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How to install Rancher on RancherOS">
+    <meta name="twitter:description" content="In this guide, I am going to cover how to install Kubernetes cluster on single node using Rancher on RancherOS as Virtual Machine.KubernetesKubernetes is an open-source container-orchestration system for automating deployment, scaling and management of containerized applications. It was originally designed by Google and is now maintained by the">
+    <meta name="twitter:url" content="http://localhost:2368/how-to-install-rancher-on-rancher-os/">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1521583621977-c63c261f3054?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ&amp;s=49b1548d6a25af342d4132951d44abcb">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Najar Ramsada">
+    <meta property="og:image:width" content="1080">
+    <meta property="og:image:height" content="720">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "BLOGS @ RAMSADA.io",
+        "logo": "https://casper.ghost.org/v1.0.0/images/ghost-logo.svg"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Najar Ramsada",
+        "url": "http://localhost:2368/author/najar/",
+        "sameAs": []
+    },
+    "headline": "How to install Rancher on RancherOS",
+    "url": "http://localhost:2368/how-to-install-rancher-on-rancher-os/",
+    "datePublished": "2018-10-03T00:47:57.000Z",
+    "dateModified": "2018-10-03T09:35:14.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://images.unsplash.com/photo-1521583621977-c63c261f3054?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExNzczfQ&s=49b1548d6a25af342d4132951d44abcb",
+        "width": 1080,
+        "height": 720
+    },
+    "description": "In this guide, I am going to cover how to install Kubernetes cluster on single node using Rancher on RancherOS as Virtual Machine.KubernetesKubernetes is an open-source container-orchestration system for automating deployment, scaling and management of containerized applications. It was originally designed by Google and is now maintained by the",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:2368/"
+    }
+}
+    </script>
+
+    <script src="../public/ghost-sdk.min.js?v=04a0ffb201"></script>
+<script>
+ghost.init({
+	clientId: "ghost-frontend",
+	clientSecret: "c9fd6388913b"
+});
+</script>
+    <meta name="generator" content="Ghost 2.1">
+    <link rel="alternate" type="application/rss+xml" title="BLOGS @ RAMSADA.io" href="../rss/index.html">
+    <!-- Prism.js -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.css" rel="stylesheet">
+
+<!-- Google verification -->
+<meta name="google-site-verification" content="ZFnggYyjgf-IPRZV2E0H7FnbPcCPvBJ9IU91tYE6yY8">
+<!-- Search tags -->
+<meta name="keywords" content="Najar Ramsada,Najar,Ramsada,najarramsada,
+docker,ghost,github,Infrastructure Engineer,blogs,cloud">
+<!-- Particle.js -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <meta name="keywords" content="Rancher, RancherOS, Kubernetes, docker swarm, Najar Ramsada,Najar,Ramsada,najarramsada,
+docker,ghost,github,Infrastructure Engineer,blog,cloud">
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+
+        
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+                <a class="site-nav-logo" href="../"><img src="https://casper.ghost.org/v1.0.0/images/ghost-logo.svg" alt="BLOGS @ RAMSADA.io"></a>
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="../">Home</a></li>
+    <li class="nav-ramsadaio" role="menuitem"><a href="https://ramsada.io">RAMSADA.io</a></li>
+    <li class="nav-github" role="menuitem"><a href="https://github.com/najarramsada">GITHUB</a></li>
+    <li class="nav-docker" role="menuitem"><a href="https://hub.docker.com/r/najarramsada/">DOCKER</a></li>
+    <li class="nav-linkedin" role="menuitem"><a href="https://au.linkedin.com/in/najarramsada">LINKEDIN</a></li>
+</ul>
+
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+        </div>
+            <a class="rss-button" href="https://feedly.com/i/subscription/feed/http://localhost:2368/rss/" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"></circle><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"></path></svg>
+</a>
+    </div>
+</nav>
+    </div>
+</header>
+
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post ">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="2018-10-03">3 October 2018</time>
+                </section>
+                <h1 class="post-full-title">How to install single node Kubernetes cluster using Rancher on RancherOS</h1>
+            </header>
+
+            <figure class="post-full-image" style="background-image: url(https://images.unsplash.com/photo-1521583621977-c63c261f3054?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ&amp;s=49b1548d6a25af342d4132951d44abcb)">
+            </figure>
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <p>In this guide, I am going to cover how to install Kubernetes cluster on single node using Rancher on RancherOS as Virtual Machine.</p><figure class="kg-card kg-image-card"><img src="../content/images/2018/10/ranchkube.png" class="kg-image"></figure><h2 id="kubernetes">Kubernetes</h2><p><em>Kubernetes is an open-source container-orchestration system for automating deployment, scaling and management of containerized applications. It was originally designed by Google and is now maintained by the Cloud Native Computing Foundation.</em></p><h2 id="rancheros">RancherOS</h2><p><em><strong>RancherOS</strong> is the smallest, easiest way to run Docker in production. Everything in <strong>RancherOS</strong> is a container managed by Docker. This includes system services such as udev and syslog . Because it only includes the services necessary to run Docker, <strong>RancherOS</strong> is dramatically smaller than most traditional <strong>operating systems</strong>.</em></p><h2 id="rancher">Rancher</h2><p><em><strong>Rancher</strong> is deployed as a set of Docker containers. Running <strong>Rancher</strong> is as simple as launching two containers. One container as the management <strong>server</strong> and another container on a node as an agent. <strong>Rancher Server</strong> - Single Container (non-HA) <strong>Rancher Server</strong> - Single Container (non-HA) - External database.</em></p><h2 id="install-rancheros-as-a-virtual-machine">Install RancherOS as a Virtual Machine</h2><p>Download latest release of Rancher OS from <a href="https://github.com/rancher/os/releases/latest">Rancher download page on github</a>.</p><p><a href="https://github.com/rancher/os/releases/latest">https://github.com/rancher/os/releases/latest</a></p><p>Create a new Virtual Machine using typical settings and choose the downloaded rancher ISO as an installer disk. Make sure you select Linux (Other linux 4.x or later kernal 64bit) as the guest operating system.</p><p>		- 2 CPU/4-8GB RAM/40GB HDD</p><figure class="kg-card kg-image-card"><img src="../content/images/2018/10/Screen-Shot-2018-10-03-at-10.52.19-am.png" class="kg-image"></figure><figure class="kg-card kg-image-card"><img src="../content/images/2018/10/Screen-Shot-2018-10-03-at-10.52.42-am.png" class="kg-image"></figure><p>Start the VM and boot from the ISO, once the VM is up, we are going to setup a cloud-config.yml file to customise our RancherOS install. Follow below commands to customise and install RancherOS.</p><p>Open VM remote console and login as root (Rancher ISO auto logs you in as rancher user).</p><figure class="kg-card kg-image-card"><img src="../content/images/2018/10/Screen-Shot-2018-10-03-at-10.59.40-am.png" class="kg-image"></figure><p>login as root</p><pre><code>rancher@rancher:~$ sudo /bin/bash</code></pre>
+<p>change password for rancher user</p><pre><code>rancher@rancher:~$ passwd rancher</code></pre>
+<figure class="kg-card kg-image-card"><img src="../content/images/2018/10/Screen-Shot-2018-10-03-at-11.01.07-am.png" class="kg-image"></figure><p>ssh into Rancher VM from your desktop</p><pre><code>$ ssh rancher@&lt;IP_ADDRESS of rancher VM&gt;
+</code></pre>
+<p>create a cloud-config.yml file, this is required at the least for adding ssh keys</p><pre><code>vi cloud-config.yml</code></pre>
+<p>Insert the following in cloud-config.yml file. </p><pre><code>#cloud-config
+# ssh keys for access
+ssh_authorized_keys:
+  - &lt;your ssh keys here&gt;
+
+# rancherOS hostname
+hostname: &lt;hostname&gt;
+
+# rancher-network settings
+rancher:
+  network:
+    interfaces:
+      eth0:
+        dhcp: true</code></pre>
+<figure class="kg-card kg-image-card"><img src="../content/images/2018/10/Screen-Shot-2018-10-03-at-11.03.40-am.png" class="kg-image"></figure><p>Save the file and begin the installation.</p><pre><code>sudo ros install -c cloud-config.yml -d /dev/sda</code></pre>
+<p>Once the installation is finished, reboot the VM. RancherOS VM is now ready, you can login using rancher user and your ssh keys.</p><p>This is where you can now run any docker containers on this VM. You can stop here or take it forward and install Rancher and configure Kubernetes cluster for docker swarm mode.</p><h2 id="install-rancher-on-rancheros">Install Rancher on RancherOS</h2><p>Rancher runs as a docker container on RancherOS. All you have to do is simply run the container as below.</p><pre><code>docker run -d --restart=unless-stopped -p 8080:80 -p 8443:443 -v rancher:/var/lib/rancher rancher/rancher
+</code></pre>
+<blockquote>
+<p>Map port 80 to 8080 and 443 to 8443. This is required if you plan to use more than one node in cluster as the ingress proxy will need to use default port 80 and 443.</p>
+</blockquote>
+<pre><code>-p 8080:80 -p 8443:443
+</code></pre>
+<blockquote>
+<p>Use a persitent volume to retain the configuration for Rancher</p>
+</blockquote>
+<pre><code>-v rancher:/var/lib/rancher
+</code></pre>
+<p>Give it a minute or so and open up a web browser and point it to IP address of your RancherOS VM and port 8080. e.g. http://192.168.1.18:8080/</p><p>Create a password for Admin user and URL for Rancher.</p><p>Next you will need to add a Kubernetes cluster before you can deploy any services or workloads.</p><figure class="kg-card kg-image-card"><img src="../content/images/2018/10/Screen-Shot-2018-10-03-at-3.23.32-pm.png" class="kg-image"></figure><p>Select Add Cluster &gt; Custom &gt; Give it a name &gt; Next.</p><figure class="kg-card kg-image-card"><img src="../content/images/2018/10/Screen-Shot-2018-10-03-at-3.24.06-pm.png" class="kg-image"></figure><p>Select all three node option. This will ensure our single node can function correctly.</p><figure class="kg-card kg-image-card"><img src="../content/images/2018/10/Screen-Shot-2018-10-03-at-3.24.27-pm.png" class="kg-image"></figure><p>Copy the command displayed in step 2 and run the command in RancherOS VM to add that VM as Node in the Kubernetes cluster.</p><p>Give it a minute or so and you will see "1 new node has registered".</p><figure class="kg-card kg-image-card"><img src="../content/images/2018/10/Screen-Shot-2018-10-03-at-3.26.12-pm.png" class="kg-image"></figure><p>You will see this node in provisioning state.</p><figure class="kg-card kg-image-card"><img src="../content/images/2018/10/Screen-Shot-2018-10-03-at-3.27.22-pm.png" class="kg-image"></figure><p>After minute or so, this node will be in Active state.</p><figure class="kg-card kg-image-card"><img src="../content/images/2018/10/Screen-Shot-2018-10-03-at-3.42.42-pm.png" class="kg-image"></figure><p>Your Kubernetes cluster is now ready to use.</p><figure class="kg-card kg-image-card"><img src="../content/images/2018/10/Screen-Shot-2018-10-03-at-3.44.51-pm.png" class="kg-image"></figure><p>That's it. You now have a Kubernetes cluster running on single VM. You can add more nodes as same as above.</p><p>Go ahead and download Kubeconfig file or launch the Kubectl from GUI or just deploy the apps, services from Rancher GUI.</p>
+                </div>
+            </section>
+
+
+            <footer class="post-full-footer">
+
+
+                    
+<section class="author-card">
+        <span class="avatar-wrapper"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"></path></g></svg>
+</span>
+    <section class="author-card-content">
+        <h4 class="author-card-name"><a href="../author/najar/">Najar Ramsada</a></h4>
+            <p>Read <a href="../author/najar/">more posts</a> by this author.</p>
+    </section>
+</section>
+<div class="post-full-footer-right">
+    <a class="author-card-button" href="../author/najar/">Read More</a>
+</div>
+
+
+            </footer>
+
+
+        </article>
+
+    </div>
+</main>
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+
+                <article class="post-card post no-image">
+    <div class="post-card-content">
+        <a class="post-card-content-link" href="../test/">
+            <header class="post-card-header">
+                <h2 class="post-card-title">Test</h2>
+            </header>
+            <section class="post-card-excerpt">
+                <p></p>
+            </section>
+        </a>
+        <footer class="post-card-meta">
+
+            <ul class="author-list">
+                <li class="author-list-item">
+
+                    <div class="author-name-tooltip">
+                        Najar Ramsada
+                    </div>
+
+                        <a href="../author/najar/" class="static-avatar author-profile-image"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"></path></g></svg>
+</a>
+                </li>
+            </ul>
+
+            <span class="reading-time">1 min read</span>
+
+        </footer>
+    </div>
+</article>
+
+                <article class="post-card post">
+        <a class="post-card-image-link" href="../interactive-particles-on-blogs/">
+            <div class="post-card-image" style="background-image: url(https://images.unsplash.com/photo-1537819191377-d3305ffddce4?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ&amp;s=c8b2420e363f164d91524210c9a1df5b)"></div>
+        </a>
+    <div class="post-card-content">
+        <a class="post-card-content-link" href="../interactive-particles-on-blogs/">
+            <header class="post-card-header">
+                <h2 class="post-card-title">Interactive particles on Ghost</h2>
+            </header>
+            <section class="post-card-excerpt">
+                <p>Set your blog alive with Particles using particles.js Javascripts.</p>
+            </section>
+        </a>
+        <footer class="post-card-meta">
+
+            <ul class="author-list">
+                <li class="author-list-item">
+
+                    <div class="author-name-tooltip">
+                        Najar Ramsada
+                    </div>
+
+                        <a href="../author/najar/" class="static-avatar author-profile-image"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"></path></g></svg>
+</a>
+                </li>
+            </ul>
+
+            <span class="reading-time">1 min read</span>
+
+        </footer>
+    </div>
+</article>
+
+        </div>
+    </div>
+</aside>
+
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="../">
+            <span>BLOGS @ RAMSADA.io</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">—</span>
+    <div class="floating-header-title">How to install single node Kubernetes cluster using Rancher on RancherOS</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"></path>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=How%20to%20install%20single%20node%20Kubernetes%20cluster%20using%20Rancher%20on%20RancherOS&amp;url=http://localhost:2368/how-to-install-rancher-on-rancher-os/" onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"></path></svg>
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/how-to-install-rancher-on-rancher-os/" onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"></path></svg>
+        </a>
+    </div>
+    <progress id="reading-progress" class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="../">BLOGS @ RAMSADA.io</a> © 2018</section>
+                <nav class="site-footer-nav">
+                    <a href="../">Latest Posts</a>
+                    
+                    
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <script>
+        var images = document.querySelectorAll('.kg-gallery-image img');
+        images.forEach(function (image) {
+            var container = image.closest('.kg-gallery-image');
+            var width = image.attributes.width.value;
+            var height = image.attributes.height.value;
+            var ratio = width / height;
+            container.style.flex = ratio + ' 1 0%';
+        })
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js?v=04a0ffb201"></script>
+
+
+    <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('#reading-progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+
+});
+</script>
+
+
+    <!-- Prism.js -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.css" rel="stylesheet">
+
+</body>
